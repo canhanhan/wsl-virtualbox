@@ -1,6 +1,6 @@
 #!/bin/bash
 
-tmpdir=$(wslpath `cmd.exe /c echo %TEMP%`)
+wslroot=$(wslpath $(reg.exe query "HKCU\Software\Microsoft\Windows\CurrentVersion\Lxss" /s /v BasePath | awk 'BEGIN { FS = "[ \t]+" } ; /BasePath/{print $4}' | tr -d "[:cntrl:]"))
 is_next_path=0
 args=()
 for argument; do
@@ -8,9 +8,7 @@ for argument; do
     is_next_path=1
   elif [ $is_next_path = 1 ]; then
     if [[ $argument == /tmp/* ]]; then
-      folder="$(dirname "$argument")"
-      cp -rf "$folder" "$tmpdir"
-      argument="$tmpdir/${argument:5}"
+      argument="$wslroot/rootfs$argument"
     fi
     argument=$(wslpath -w "$argument")
     is_next_path=0
