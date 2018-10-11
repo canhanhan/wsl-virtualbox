@@ -2,7 +2,7 @@
 VBoxManage wrapper to use Virtualbox from WSL for Packer. This is very experimental and may cause issues. Use it in your own risk.
 
 ## Installation
-```
+```bash
 sudo su
 mkdir -p /usr/local/bin
 wget -O /usr/local/bin/VBoxManage.sh https://raw.githubusercontent.com/finarfin/wsl-virtualbox/master/VBoxManage.sh
@@ -12,7 +12,9 @@ exit
 ```
 
 ## Validate
-```VBoxManage --version```
+```bash
+VBoxManage --version
+```
 
 ## Usage
 No additional changes are required. You can use Packer's Virtualbox builders as usual.
